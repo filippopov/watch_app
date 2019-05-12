@@ -3,6 +3,8 @@
 use WatchApp\Core\MVC\MVCContext;
 use WatchApp\Core\Application;
 use WatchApp\Core\Response;
+use WatchApp\Adapter\Database;
+use WatchApp\Config\DbConfig;
 
 require_once 'vendor/autoload.php';
 
@@ -21,6 +23,13 @@ $mvcContext->setController($controllerName);
 $mvcContext->setAction($actionName);
 $mvcContext->setUrlJunk($self);
 $mvcContext->setArguments($params);
+
+Database::instance(
+    DbConfig::DB_HOST,
+    DbConfig::DB_USER,
+    DbConfig::DB_PASS,
+    DbConfig::DB_NAME
+);
 
 try {
     $app = new Application();

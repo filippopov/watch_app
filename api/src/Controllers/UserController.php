@@ -9,8 +9,11 @@
 namespace WatchApp\Controllers;
 
 
+use WatchApp\Adapter\Database;
+use WatchApp\Config\DbConfig;
 use WatchApp\Core\MVC\Post;
 use WatchApp\Core\MVC\Session;
+use WatchApp\Repositories\User\UsersRepository;
 
 class UserController
 {
@@ -26,8 +29,15 @@ class UserController
         $this->post = Post::instance($_POST);
     }
 
-    public function register($proba, $opa)
+    public function register($email, $password)
     {
-        var_dump('hi', $proba, $opa);
+        $userRepository = new UsersRepository();
+        $userRepository->create([
+            'email' => $email,
+            'password' => $password,
+            'is_active' => 1
+        ]);
+
+
     }
 }
