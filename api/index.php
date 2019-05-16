@@ -1,4 +1,5 @@
 <?php
+header('Access-Control-Allow-Origin: *');
 
 use WatchApp\Core\MVC\MVCContext;
 use WatchApp\Core\Application;
@@ -7,6 +8,11 @@ use WatchApp\Adapter\Database;
 use WatchApp\Config\DbConfig;
 
 require_once 'vendor/autoload.php';
+$session_id = isset($_POST['session_id']) ? $_POST['session_id'] : null;
+
+if (!is_null($session_id)) {
+    session_id($session_id);
+}
 
 session_start();
 
@@ -17,6 +23,10 @@ $uri = str_replace($self, "", $uri);
 $params = explode("/", $uri);
 $controllerName = array_shift($params);
 $actionName = array_shift($params);
+
+$actionName = is_null($actionName) ? '' : $actionName;
+$controllerName = is_null($controllerName) ? '' : $controllerName;
+$self = is_null($self) ? '' : $self;
 
 $mvcContext = MVCContext::instance();
 $mvcContext->setController($controllerName);

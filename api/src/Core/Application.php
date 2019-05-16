@@ -36,6 +36,14 @@ class Application
             . ucfirst($this->mvcContext->getController())
             . self::CONTROLLERS_SUPFIX;
 
+        if (empty($this->mvcContext->getController())) {
+            throw new ApplicationException('Controller is missing');
+        }
+
+        if (empty($this->mvcContext->getAction())) {
+            throw new ApplicationException('Action is missing');
+        }
+
         if (!class_exists($controllerFullNameWithNamespace)) {
             throw new ApplicationException('Controller do not exist');
         }
