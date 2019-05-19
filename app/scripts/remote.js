@@ -18,6 +18,7 @@ let remote = (() => {
         if (data) {
             obj.data = data;
         }
+
         return $.ajax(obj);
     }
 

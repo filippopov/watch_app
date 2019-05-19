@@ -52,26 +52,7 @@ handlers.getForgotPasswordPage = function (ctx) {
     })
 };
 
-handlers.getHomePage = function (ctx) {
-    ctx.isAuth = auth.isAuth();
-    ctx.user_id = sessionStorage.getItem('userId');
 
-    if (!ctx.isAuth) {
-        ctx.redirect('#/home');
-        return;
-    }
-
-    $('body').addClass('skin-blue');
-
-    ctx.loadPartials({
-        aside: './templates/common/aside.hbs',
-        header: './templates/common/header.hbs',
-        footer: './templates/common/footer.hbs'
-    })
-    .then(function () {
-        this.partial('./templates/home/home-page.hbs');
-    })
-};
 
 handlers.forgotPassword = function (ctx) {
     let email = ctx.params.email;

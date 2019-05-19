@@ -10,6 +10,9 @@ $(() => {
         this.get('#/registerPage', handlers.getRegisterPage);
         this.get('#/forgotPasswordPage', handlers.getForgotPasswordPage);
         this.get('#/homePage', handlers.getHomePage);
+        this.get('#/addWatch', handlers.getWatchForm);
+
+
 
         this.post('#/forgotPassword', handlers.forgotPassword);
         this.post('#/register', handlers.registerUser);

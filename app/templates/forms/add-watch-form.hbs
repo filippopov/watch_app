@@ -1,0 +1,124 @@
+<link rel="stylesheet" href="node_modules/select2/dist/css/select2.min.css">
+<script src="node_modules/select2/dist/js/select2.full.min.js"></script>
+
+
+<div class="box-body">
+    <div class="row">
+        <div class="col-md-12">
+            <form method="post">
+                <div class="form-group">
+                    <label>Brand*</label>
+                    <select class="form-control select2" style="width: 100%;">
+                        <option value="">Please select</option>
+                        {{#each brands}}
+                            <option value="{{id}}">{{name}}</option>
+                        {{/each}}
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Model*</label>
+                    <input type="text" class="form-control" placeholder="Enter ...">
+                </div>
+                <div class="form-group">
+                    <label>Reference number</label>
+                    <input type="text" class="form-control" placeholder="Enter ...">
+                </div>
+                <hr>
+                <h2>Enter the most important details</h2>
+                <div class="form-group">
+                    <label>Gender</label>
+                    <select class="form-control select2" style="width: 100%;">
+                        <option value="">Please select</option>
+                        {{#each genders}}
+                            <option value="{{id}}">{{name}}</option>
+                        {{/each}}
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Movement</label>
+                    <select class="form-control select2" style="width: 100%;">
+                        <option value="">Please select</option>
+                        {{#each movements}}
+                            <option value="{{id}}">{{name}}</option>
+                        {{/each}}
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Case Material</label>
+                    <select class="form-control select2" style="width: 100%;">
+                        <option value="">Please select</option>
+                        {{#each caseMaterials}}
+                            <option value="{{id}}">{{name}}</option>
+                        {{/each}}
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Bracelet Material</label>
+                    <select class="form-control select2" style="width: 100%;">
+                        <option value="">Please select</option>
+                        {{#each braceletMaterials}}
+                            <option value="{{id}}">{{name}}</option>
+                        {{/each}}
+                    </select>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>
+
+<div id="accordion">
+    <h3>Section 1</h3>
+    <div>
+        <p>
+            Mauris mauris ante, blandit et, ultrices a, suscipit eget, quam. Integer
+            ut neque. Vivamus nisi metus, molestie vel, gravida in, condimentum sit
+            amet, nunc. Nam a nibh. Donec suscipit eros. Nam mi. Proin viverra leo ut
+            odio. Curabitur malesuada. Vestibulum a velit eu ante scelerisque vulputate.
+        </p>
+    </div>
+    <h3>Section 2</h3>
+    <div>
+        <p>
+            Sed non urna. Donec et ante. Phasellus eu ligula. Vestibulum sit amet
+            purus. Vivamus hendrerit, dolor at aliquet laoreet, mauris turpis porttitor
+            velit, faucibus interdum tellus libero ac justo. Vivamus non quam. In
+            suscipit faucibus urna.
+        </p>
+    </div>
+    <h3>Section 3</h3>
+    <div>
+        <p>
+            Nam enim risus, molestie et, porta ac, aliquam ac, risus. Quisque lobortis.
+            Phasellus pellentesque purus in massa. Aenean in pede. Phasellus ac libero
+            ac tellus pellentesque semper. Sed ac felis. Sed commodo, magna quis
+            lacinia ornare, quam ante aliquam nisi, eu iaculis leo purus venenatis dui.
+        </p>
+        <ul>
+            <li>List item one</li>
+            <li>List item two</li>
+            <li>List item three</li>
+        </ul>
+    </div>
+    <h3>Section 4</h3>
+    <div>
+        <p>
+            Cras dictum. Pellentesque habitant morbi tristique senectus et netus
+            et malesuada fames ac turpis egestas. Vestibulum ante ipsum primis in
+            faucibus orci luctus et ultrices posuere cubilia Curae; Aenean lacinia
+            mauris vel est.
+        </p>
+        <p>
+            Suspendisse eu nisl. Nullam ut libero. Integer dignissim consequat lectus.
+            Class aptent taciti sociosqu ad litora torquent per conubia nostra, per
+            inceptos himenaeos.
+        </p>
+    </div>
+</div>
+
+<script>
+    $( function() {
+        $( "#accordion" ).accordion();
+        $('.select2').select2();
+    } );
+</script>
