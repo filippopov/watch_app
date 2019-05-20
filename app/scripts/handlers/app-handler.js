@@ -36,7 +36,7 @@ handlers.getWatchForm = async function (ctx) {
     let brands = await app.getBrands();
 
     try {
-        brands = $.parseJSON(brands);
+        brands = JSON.parse(brands);
 
         if (!brands.success) {
             notify.showError('Error');
@@ -48,7 +48,18 @@ handlers.getWatchForm = async function (ctx) {
         ctx.movements = brands.data.movements;
         ctx.caseMaterials = brands.data.caseMaterials;
         ctx.braceletMaterials = brands.data.braceletMaterials;
+        ctx.braceletColors = brands.data.braceletColors;
+        ctx.claspMaterials = brands.data.claspMaterials;
+        ctx.clasps = brands.data.clasps;
+        ctx.bezelMaterials = brands.data.bezelMaterials;
+        ctx.glass = brands.data.glass;
+        ctx.waterResistance = brands.data.waterResistance;
+        ctx.dial = brands.data.dial;
+        ctx.dialNumerals = brands.data.dialNumerals;
+        ctx.watchFunctions = brands.data.watchFunctions;
+        ctx.watchCharacteristics = brands.data.watchCharacteristics;
     }catch (e){
+        console.log(1);
         notify.showError('Error');
     }
 

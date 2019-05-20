@@ -58,13 +58,34 @@ class HomeController
         $movements = $this->watchService->getMovements();
         $caseMaterials = $this->watchService->getCaseMaterials();
         $braceletMaterials = $this->watchService->getBraceletMaterials();
+        $braceletColors = $this->watchService->getBraceletColors();
+        $claspMaterials = $this->watchService->getClaspMaterials();
+        $clasps = $this->watchService->getClaspTypes();
+        $bezelMaterials = $this->watchService->getBezelMaterials();
+        $glass = $this->watchService->getGlassTypes();
+        $waterResistance = $this->watchService->getWaterResistance();
+        $dial = $this->watchService->getDialTypes();
+        $dialNumerals = $this->watchService->getDialNumeralsTypes();
+        $watchFunctions = $this->watchService->getWatchFunctions();
+        $watchCharacteristics = $this->watchService->getWatchCharacteristics();
+
 
         $data = [
             'brands' => $brands,
             'genders' => $genders,
             'movements' => $movements,
             'caseMaterials' => $caseMaterials,
-            'braceletMaterials' => $braceletMaterials
+            'braceletMaterials' => $braceletMaterials,
+            'braceletColors' => $braceletColors,
+            'claspMaterials' => $claspMaterials,
+            'clasps' => $clasps,
+            'bezelMaterials' => $bezelMaterials,
+            'glass' => $glass,
+            'waterResistance' => $waterResistance,
+            'dial' => $dial,
+            'dialNumerals' => $dialNumerals,
+            'watchFunctions' => $watchFunctions,
+            'watchCharacteristics' => $watchCharacteristics
         ];
 
         $this->response->setResponse(Response::RESPONSE_KEY_SUCCESS, true);
