@@ -3,6 +3,7 @@ let remote = (() => {
 
     function makeRequest(method, controller, action, params) {
         return {
+            async: true,
             url: BASE_URL + controller + '/' + action,
             method: method
         }

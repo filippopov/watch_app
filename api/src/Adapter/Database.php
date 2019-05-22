@@ -33,4 +33,9 @@ class Database
     {
         return new DatabaseStatement($this->pdo->prepare($statement));
     }
+
+    public function lastInsertId()
+    {
+        return $this->pdo->lastInsertId();
+    }
 }

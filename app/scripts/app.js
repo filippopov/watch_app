@@ -18,6 +18,7 @@ $(() => {
         this.post('#/register', handlers.registerUser);
         this.post('#/login', handlers.loginUser);
         this.get('#/logout', handlers.logout);
+        this.post('#/createWatch', handlers.createWatch)
 
     });
 

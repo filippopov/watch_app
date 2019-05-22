@@ -36,7 +36,7 @@ abstract class AbstractRepository
 
     abstract public function setOptions();
 
-    public function create(array $bindParams = array()) : bool
+    public function create(array $bindParams = array())
     {
         if (count($bindParams) == 0) {
             throw new ApplicationException('Please set params');
@@ -63,7 +63,13 @@ abstract class AbstractRepository
 
         $stmt = $this->db->prepare($query);
 
-        return $stmt->execute($placeholdersValues);
+        $isSave = $stmt->execute($placeholdersValues);
+
+        if ($isSave) {
+            return $this->db->lastInsertId();
+        }
+
+        return $isSave;
     }
 
     public function update(int $id, array $bindParams = array()) : bool

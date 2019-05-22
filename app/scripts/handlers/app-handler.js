@@ -59,7 +59,6 @@ handlers.getWatchForm = async function (ctx) {
         ctx.watchFunctions = brands.data.watchFunctions;
         ctx.watchCharacteristics = brands.data.watchCharacteristics;
     }catch (e){
-        console.log(1);
         notify.showError('Error');
     }
 
@@ -74,3 +73,80 @@ handlers.getWatchForm = async function (ctx) {
             this.partial('./templates/home/home-page.hbs');
         })
 };
+
+handlers.createWatch = function (ctx) {
+    let base_caliber = ctx.params.base_caliber;
+    let bazel_material = ctx.params.bazel_material;
+    let bracelet_color = ctx.params.bracelet_color;
+    let bracelet_material = ctx.params.bracelet_material;
+    let brand = ctx.params.brand;
+    let caliber = ctx.params.caliber;
+    let calsp_material = ctx.params.calsp_material;
+    let case_diameter = ctx.params.case_diameter;
+    let case_material = ctx.params.case_material;
+    let clasp = ctx.params.clasp;
+    let dial = ctx.params.dial;
+    let dial_numerals = ctx.params.dial_numerals;
+    let frequency = ctx.params.frequency;
+    let gender = ctx.params.gender;
+    let glass = ctx.params.glass;
+    let model = ctx.params.model;
+    let movement = ctx.params.movement;
+    let picture = ctx.params.picture;
+    let power_reserve = ctx.params.power_reserve;
+    let reference_number = ctx.params.reference_number;
+    let thickness = ctx.params.thickness;
+    let watch_characteristics = ctx.params['watch_characteristics[]'];
+    let watch_functions = ctx.params['watch_functions[]'];
+    let water_resistance = ctx.params.water_resistance;
+    let number_of_jewels = ctx.params.number_of_jewels;
+
+    if (brand === '') {
+        notify.showError('Please choose brand!');
+        return;
+    }
+
+    if (model === '') {
+        notify.showError('Please add model!');
+        return;
+    }
+
+    let userId = sessionStorage.getItem('userId');
+    let sessionId = sessionStorage.getItem('session_id');
+
+    app.addWatch(base_caliber, bazel_material, bracelet_color, bracelet_material, brand, caliber,
+        calsp_material, case_diameter, case_material, clasp, dial, dial_numerals, frequency,
+    gender, glass, model, movement, picture, power_reserve, reference_number, thickness,
+    watch_characteristics, watch_functions, water_resistance, number_of_jewels, userId, sessionId)
+        .then((data) => {
+            console.log(data);
+        })
+
+
+};
+
+//handlers.registerUser = function (ctx) {
+//    let email = ctx.params.email;
+//    let password = ctx.params.password;
+//    let repeatPass = ctx.params.repeatPass;
+//
+//    auth.register(email, password, repeatPass)
+//        .then((userData) => {
+//            try {
+//                userData = $.parseJSON(userData);
+//                let data = userData.data;
+//                let message = userData.message;
+//                let isSuccess = userData.success;
+//
+//                if (isSuccess) {
+//                    auth.saveSession(data);
+//                    notify.showInfo(message);
+//                    ctx.redirect('#/homePage');
+//                } else {
+//                    notify.showError(message);
+//                }
+//            }catch(e){
+//                notify.showError('Error');
+//            }
+//        })
+//};

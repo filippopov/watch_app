@@ -1,16 +1,29 @@
-<link rel="stylesheet" href="node_modules/select2/dist/css/select2.min.css">
-<script src="node_modules/select2/dist/js/select2.full.min.js"></script>
-
 <div class="box-body">
     <div class="row">
         <div class="col-md-12">
-            <form method="post">
+            <form method="post" action="#/createWatch">
                 <div id="accordion">
                     <h3>My watch</h3>
                     <div>
+                        <!--<input type="file" name="files[]" id="fileInput" multiple onchange="addFiles(event)">-->
+                        <!--<label for="fileInput" id="fileLabel"-->
+                               <!--ondragover="overrideDefault(event); fileHover()"-->
+                               <!--ondragenter="overrideDefault(event); fileHover()"-->
+                               <!--ondragleave="overrideDefault(event); fileHoverEnd()"-->
+                               <!--ondrop="overrideDefault(event); fileHoverEnd(); addFiles(event)"-->
+                        <!-->
+                            <!--<i class="fa fa-download fa-5x"></i>-->
+                            <!--<br>-->
+                            <!--<span id="fileLabelText">Chose a file or drag it here</span>-->
+                            <!--<br>-->
+                            <!--<span id="uploadStatus"></span>-->
+                        <!--</label>-->
+                        <div id="uploades"></div>
+                        <div class="dropzone" id="dropzone">Drop files here to upload</div>
+                        <input type="hidden" name="picture" id="picture">
                         <div class="form-group">
                             <label>Brand*</label>
-                            <select class="form-control select2" style="width: 100%;">
+                            <select name="brand" class="form-control select2" style="width: 100%;">
                                 <option value="">Please select</option>
                                 {{#each brands}}
                                     <option value="{{id}}">{{name}}</option>
@@ -19,18 +32,18 @@
                         </div>
                         <div class="form-group">
                             <label>Model*</label>
-                            <input type="text" class="form-control" placeholder="Enter ...">
+                            <input type="text" name="model" class="form-control" placeholder="Enter ...">
                         </div>
                         <div class="form-group">
                             <label>Reference number</label>
-                            <input type="text" class="form-control" placeholder="Enter ...">
+                            <input type="text" name="reference_number" class="form-control" placeholder="Enter ...">
                         </div>
                     </div>
                     <h3>Enter the most important details</h3>
                     <div>
                         <div class="form-group">
                             <label>Gender</label>
-                            <select class="form-control select2" style="width: 100%;">
+                            <select name="gender" name="gender" class="form-control select2" style="width: 100%;">
                                 <option value="">Please select</option>
                                 {{#each genders}}
                                     <option value="{{id}}">{{name}}</option>
@@ -39,7 +52,7 @@
                         </div>
                         <div class="form-group">
                             <label>Movement</label>
-                            <select class="form-control select2" style="width: 100%;">
+                            <select name="movement" name="movement" class="form-control select2" style="width: 100%;">
                                 <option value="">Please select</option>
                                 {{#each movements}}
                                     <option value="{{id}}">{{name}}</option>
@@ -48,7 +61,7 @@
                         </div>
                         <div class="form-group">
                             <label>Case Material</label>
-                            <select class="form-control select2" style="width: 100%;">
+                            <select class="form-control select2" name="case_material" style="width: 100%;">
                                 <option value="">Please select</option>
                                 {{#each caseMaterials}}
                                     <option value="{{id}}">{{name}}</option>
@@ -57,7 +70,7 @@
                         </div>
                         <div class="form-group">
                             <label>Bracelet Material</label>
-                            <select class="form-control select2" style="width: 100%;">
+                            <select class="form-control select2" name="bracelet_material" style="width: 100%;">
                                 <option value="">Please select</option>
                                 {{#each braceletMaterials}}
                                     <option value="{{id}}">{{name}}</option>
@@ -67,7 +80,7 @@
                         <div class="form-group">
                             <label>Case diameter</label>
                             <div class="input-group">
-                                <input name="watch.caseDiameterX" placeholder="Enter ..." id="caseDiameterX" type="number" class="form-control"><span class="input-group-addon">mm</span>
+                                <input name="case_diameter" placeholder="Enter ..." id="caseDiameterX" type="number" class="form-control"><span class="input-group-addon">mm</span>
                             </div>
                         </div>
                     </div>
@@ -75,7 +88,7 @@
                     <div>
                         <div class="form-group">
                             <label>Bracelet Color</label>
-                            <select class="form-control select2" style="width: 100%;">
+                            <select name="bracelet_color" class="form-control select2" style="width: 100%;">
                                 <option value="">Please select</option>
                                 {{#each braceletColors}}
                                     <option value="{{id}}">{{name}}</option>
@@ -84,7 +97,7 @@
                         </div>
                         <div class="form-group">
                             <label>Clasp Material</label>
-                            <select class="form-control select2" style="width: 100%;">
+                            <select name="calsp_material" class="form-control select2" style="width: 100%;">
                                 <option value="">Please select</option>
                                 {{#each claspMaterials}}
                                     <option value="{{id}}">{{name}}</option>
@@ -93,7 +106,7 @@
                         </div>
                         <div class="form-group">
                             <label>Clasp</label>
-                            <select class="form-control select2" style="width: 100%;">
+                            <select name="clasp" class="form-control select2" style="width: 100%;">
                                 <option value="">Please select</option>
                                 {{#each clasps}}
                                     <option value="{{id}}">{{name}}</option>
@@ -107,7 +120,7 @@
 
                         <div class="form-group">
                             <label>Bezel Material</label>
-                            <select class="form-control select2" style="width: 100%;">
+                            <select name="bazel_material" class="form-control select2" style="width: 100%;">
                                 <option value="">Please select</option>
                                 {{#each bezelMaterials}}
                                     <option value="{{id}}">{{name}}</option>
@@ -117,12 +130,12 @@
                         <div class="form-group">
                             <label>Thickness</label>
                             <div class="input-group">
-                                <input name="watch.caseDiameterX" placeholder="Enter ..." id="caseDiameterX" type="number" class="form-control"><span class="input-group-addon">mm</span>
+                                <input name="thickness" placeholder="Enter ..." id="caseDiameterX" type="number" class="form-control"><span class="input-group-addon">mm</span>
                             </div>
                         </div>
                         <div class="form-group">
                             <label>Glass</label>
-                            <select class="form-control select2" style="width: 100%;">
+                            <select name="glass" class="form-control select2" style="width: 100%;">
                                 <option value="">Please select</option>
                                 {{#each glass}}
                                     <option value="{{id}}">{{name}}</option>
@@ -131,7 +144,7 @@
                         </div>
                         <div class="form-group">
                             <label>Water Resistance</label>
-                            <select class="form-control select2" style="width: 100%;">
+                            <select name="water_resistance" class="form-control select2" style="width: 100%;">
                                 <option value="">Please select</option>
                                 {{#each waterResistance}}
                                     <option value="{{id}}">{{name}}</option>
@@ -140,7 +153,7 @@
                         </div>
                         <div class="form-group">
                             <label>Dial</label>
-                            <select class="form-control select2" style="width: 100%;">
+                            <select name="dial" class="form-control select2" style="width: 100%;">
                                 <option value="">Please select</option>
                                 {{#each dial}}
                                     <option value="{{id}}">{{name}}</option>
@@ -149,7 +162,7 @@
                         </div>
                         <div class="form-group">
                             <label>Dial Numerals</label>
-                            <select class="form-control select2" style="width: 100%;">
+                            <select name="dial_numerals" class="form-control select2" style="width: 100%;">
                                 <option value="">Please select</option>
                                 {{#each dialNumerals}}
                                     <option value="{{id}}">{{name}}</option>
@@ -161,26 +174,26 @@
                     <div>
                         <div class="form-group">
                             <label>Movement/Caliber</label>
-                            <input type="text" class="form-control" placeholder="Enter ...">
+                            <input name="caliber" type="text" class="form-control" placeholder="Enter ...">
                         </div>
                         <div class="form-group">
                             <label>Base caliber</label>
-                            <input type="text" class="form-control" placeholder="Enter ...">
+                            <input name="base_caliber" type="text" class="form-control" placeholder="Enter ...">
                         </div>
                         <div class="form-group">
                             <label>Power reserve</label>
                             <div class="input-group">
-                                <input name="watch.caseDiameterX" placeholder="Enter ..." id="caseDiameterX" type="number" class="form-control"><span class="input-group-addon">h</span>
+                                <input name="power_reserve" placeholder="Enter ..." id="caseDiameterX" type="number" class="form-control"><span class="input-group-addon">h</span>
                             </div>
                         </div>
                         <div class="form-group">
                             <label>Number of jewels</label>
-                            <input type="text" class="form-control" placeholder="Enter ...">
+                            <input type="number" name="number_of_jewels" class="form-control" placeholder="Enter ...">
                         </div>
                         <div class="form-group">
                             <label>Frequency</label>
                             <div class="input-group">
-                                <input name="watch.caseDiameterX" placeholder="Enter ..." id="caseDiameterX" type="number" class="form-control"><span class="input-group-addon">A/h</span>
+                                <input name="frequency" placeholder="Enter ..." id="caseDiameterX" type="number" class="form-control"><span class="input-group-addon">A/h</span>
                             </div>
                         </div>
                     </div>
@@ -194,7 +207,7 @@
                                     {{#if isEven}}
                                         <div class="checkbox">
                                             <label>
-                                                <input value="{{id}}" type="checkbox">
+                                                <input value="{{id}}" type="checkbox" name="watch_functions[]">
                                                 {{name}}
                                             </label>
                                         </div>
@@ -207,7 +220,7 @@
                                     {{else}}
                                         <div class="checkbox">
                                             <label>
-                                                <input value="{{id}}" type="checkbox">
+                                                <input value="{{id}}" type="checkbox" name="watch_functions[]">
                                                 {{name}}
                                             </label>
                                         </div>
@@ -224,7 +237,7 @@
                                     {{#if isEven}}
                                         <div class="checkbox">
                                             <label>
-                                                <input value="{{id}}" type="checkbox">
+                                                <input value="{{id}}" type="checkbox" name="watch_characteristics[]">
                                                 {{name}}
                                             </label>
                                         </div>
@@ -237,7 +250,7 @@
                                     {{else}}
                                         <div class="checkbox">
                                             <label>
-                                                <input value="{{id}}" type="checkbox">
+                                                <input value="{{id}}" type="checkbox" name="watch_characteristics[]">
                                                 {{name}}
                                             </label>
                                         </div>
@@ -260,8 +273,115 @@
 
 
 <script>
-    $( function() {
+//    let dropFileForm = document.getElementById('dropFileForm');
+//    let fileLabelText = document.getElementById('fileLabelText');
+//    let uploadStatus = document.getElementById('uploadStatus');
+//    let droppedFiles = [];
+//
+//    function uploadFiles(event) {
+//        event.preventDefault();
+//        changeStatus("Uploading...");
+//
+//        let formData = new FormData();
+//        let xhr = new XMLHttpRequest();
+//
+//
+//        for (let x = 0; x < droppedFiles.length; x++) {
+//            formData.append('file[]', droppedFiles[x]);
+//        }
+//
+//        xhr.onload = function() {
+//            let data = this.responseText;
+//            console.log(data);
+//        };
+//
+//        xhr.open('post', 'http://localhost/watch_app/api/home/uploadPicture');
+//        xhr.send(formData);
+//    }
+//
+//    function changeStatus(text){
+//        uploadStatus.innerText = text;
+//    }
+//
+//    function overrideDefault(event){
+//        event.preventDefault();
+//        event.stopPropagation();
+//    }
+//
+//    function fileHover(){
+//        dropFileForm.classList.add('fileHover');
+//    }
+//
+//    function fileHoverEnd(){
+//        dropFileForm.classList.remove('fileHover');
+//    }
+//
+//    function addFiles(event){
+//        droppedFiles = event.target.files || event.dataTransfer.files;
+//        showFiles(droppedFiles);
+//    }
+//
+//    function showFiles(files){
+//        if (files.length > 1) {
+//            fileLabelText.innerText = files.length + ' files selected';
+//        } else {
+//            fileLabelText.innerText = files[0].name
+//        }
+//    }
+
+    $(function() {
         $( "#accordion" ).accordion();
         $('.select2').select2();
-    } );
+
+        let dropzone = document.getElementById('dropzone');
+
+        let upload = function(files){
+            let formData = new FormData();
+            let xhr = new XMLHttpRequest();
+
+            for (let x = 0; x < files.length; x++) {
+                formData.append('file[]', files[x]);
+            }
+
+            formData.append('userId', sessionStorage.getItem('userId'));
+            formData.append('session_id', sessionStorage.getItem('session_id'));
+
+            xhr.onload = function(){
+                let data = this.responseText;
+
+                try {
+                    data = JSON.parse(data);
+
+                    if (data.success) {
+                        $('#picture').val(data.data);
+
+                        notify.showInfo('Successfully uploaded pictures!');
+                    }
+
+
+                }catch (e){
+                    notify.showError('Error');
+                }
+            };
+
+            xhr.open('post', 'http://localhost/watch_app/api/home/uploadPicture');
+            xhr.send(formData);
+        };
+
+        dropzone.ondrop = function(e){
+            e.preventDefault();
+            this.className = 'dropzone dragover';
+            upload(e.dataTransfer.files);
+        };
+
+        dropzone.ondragover = function() {
+            this.className = 'dropzone dragover';
+            return false;
+        };
+
+        dropzone.ondragleave = function(){
+            this.className = 'dropzone';
+            return false;
+        };
+    });
 </script>

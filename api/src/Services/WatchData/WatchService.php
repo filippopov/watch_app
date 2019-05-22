@@ -23,6 +23,7 @@ use WatchApp\Repositories\WatchData\GendersRepository;
 use WatchApp\Repositories\WatchData\GlassRepository;
 use WatchApp\Repositories\WatchData\MovementsRepository;
 use WatchApp\Repositories\WatchData\WatchCharacteristicsRepository;
+use WatchApp\Repositories\WatchData\WatchesRepository;
 use WatchApp\Repositories\WatchData\WatchFunctionsRepository;
 use WatchApp\Repositories\WatchData\WaterResistanceRepository;
 
@@ -60,6 +61,8 @@ class WatchService
 
     private $watchCharacteristicRepository;
 
+    private $watchesRepository;
+
     public function __construct()
     {
         $this->session = Session::instance($_SESSION);
@@ -78,6 +81,8 @@ class WatchService
         $this->dialNumeralsRepository = new DialNumeralsRepository();
         $this->watchFunctionsRepository = new WatchFunctionsRepository();
         $this->watchCharacteristicRepository = new WatchCharacteristicsRepository();
+        $this->watchesRepository = new WatchesRepository();
+
     }
 
     public function getWatchBrands()
@@ -155,6 +160,14 @@ class WatchService
         }
 
         return $result;
+    }
+
+    public function createWatch($baseCaliber, $bezelMaterial, $braceletColor, $braceletMaterial, $brand,
+                                $caliber, $claspMaterial, $caseDiameter, $caseMaterial, $clasp, $dial, $dialNumerals, $frequency,
+                                $gender, $glass, $model, $movement, $picture, $powerReserve, $referenceNumber, $thickness,
+                                $watchCharacteristics, $watchFunctions, $waterResistance, $numberOfJewels, $userId)
+    {
+//        $this->watchesRepository->create(['brand_fk' => $brand, ])
     }
 
     public function getWatchCharacteristics()

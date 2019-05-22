@@ -2,9 +2,47 @@
     min-height: 90vh;
 }
 
-/*.box-body {*/
-    /*display: flex;*/
-    /*flex-wrap: wrap;*/
-    /*justify-content: center;*/
-    /*width: 100%;*/
+/*#dropFileForm {*/
+    /*transition: 5s;*/
 /*}*/
+
+/*#dropFileForm #fileLabel {*/
+    /*border: 2px dashed #CCC;*/
+    /*display: block;*/
+    /*padding: 16px;*/
+    /*position: relative;*/
+    /*text-align: center;*/
+    /*margin-bottom: 1rem;*/
+    /*cursor: pointer;*/
+/*}*/
+
+/*#dropFileForm #fileInput {*/
+    /*display: none;*/
+/*}*/
+
+/*#dropFileForm #fileLabel::after,*/
+/*#dropFileForm #fileLabel::before {*/
+    /*position: absolute;*/
+    /*content: '';*/
+    /*top: 0;*/
+    /*bottom: 0;*/
+    /*left: 0;*/
+    /*right: 0;*/
+    /*background-color: #FFF;*/
+    /*z-index: -1;*/
+/*}*/
+
+.dropzone {
+    width: 100%;
+    height: 15rem;
+    border: 2px dashed #CCC;
+    color: #CCC;
+    line-height: 15rem;
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+.dropzone.dragover {
+    border-color: #000;
+    color: #000;
+}
