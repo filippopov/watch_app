@@ -149,12 +149,16 @@ class HomeController
         $numberOfJewels = $this->post->get('number_of_jewels');
         $userId = $this->post->get('userId');
 
-        $this->watchService->createWatch($baseCaliber, $bezelMaterial, $braceletColor, $braceletMaterial, $brand,
+        $data = $this->watchService->createWatch($baseCaliber, $bezelMaterial, $braceletColor, $braceletMaterial, $brand,
             $caliber, $claspMaterial, $caseDiameter, $caseMaterial, $clasp, $dial, $dialNumerals, $frequency,
             $gender, $glass, $model, $movement, $picture, $powerReserve, $referenceNumber, $thickness,
             $watchCharacteristics, $watchFunctions, $waterResistance, $numberOfJewels, $userId);
 
 
-        var_dump($_POST); die();
+        $this->response->setResponse(Response::RESPONSE_KEY_SUCCESS, true);
+        $this->response->setResponse(Response::RESPONSE_KEY_MESSAGE, 'Successfully add watch!');
+        $this->response->setResponse('data', $data);
+        $this->response->getReplayJson();
+        exit;
     }
 }

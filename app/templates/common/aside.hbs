@@ -3,18 +3,31 @@
     <section class="sidebar">
         <ul class="sidebar-menu" data-widget="tree">
             <li class="header">MAIN NAVIGATION</li>
-            <li class="active treeview">
-                <a href="#/homaePage">
-                    <i class="fa fa-dashboard"></i> <span>Dashboard</span>
+            {{#if dashboard}}
+                <li class="active treeview">
+            {{else}}
+                <li class="treeview">
+            {{/if}}
+                    <a href="">
+                        <i class="fa fa-dashboard"></i> <span>Dashboard</span>
                     <span class="pull-right-container">
                         <i class="fa fa-angle-left pull-right"></i>
                     </span>
-                </a>
-                <ul class="treeview-menu">
-                    <li class="active"><a href="#/homePage"><i class="fa fa-circle-o"></i> Watch collection</a></li>
-                    <li><a href="#/addWatch"><i class="fa fa-circle-o"></i> Add Watch</a></li>
-                </ul>
-            </li>
+                    </a>
+                    <ul class="treeview-menu">
+                        {{#if watchCollection}}
+                            <li class="active"><a href="#/homePage"><i class="fa fa-circle-o"></i>Watch collection</a></li>
+                        {{else}}
+                            <li><a href="#/homePage"><i class="fa fa-circle-o"></i>Watch collection</a></li>
+                        {{/if}}
+
+                        {{#if addWatch}}
+                            <li class="active"><a href="#/addWatch"><i class="fa fa-circle-o"></i>Add Watch</a></li>
+                        {{else}}
+                            <li><a href="#/addWatch"><i class="fa fa-circle-o"></i>Add Watch</a></li>
+                        {{/if}}
+                    </ul>
+                </li>
             <li><a href="#/logout"><i class="fa fa-circle-o text-red"></i> <span>Logout</span></a></li>
         </ul>
     </section>

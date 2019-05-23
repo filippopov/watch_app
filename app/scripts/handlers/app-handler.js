@@ -9,6 +9,10 @@ handlers.getHomePage = function (ctx) {
 
     app.addSkinClass();
 
+    ctx.dashboard = true;
+    ctx.watchCollection = true;
+    ctx.addWatch = false;
+
     ctx.loadPartials({
             aside: './templates/common/aside.hbs',
             header: './templates/common/header.hbs',
@@ -20,7 +24,6 @@ handlers.getHomePage = function (ctx) {
         })
 };
 
-
 handlers.getWatchForm = async function (ctx) {
     ctx.isAuth = auth.isAuth();
     ctx.user_id = sessionStorage.getItem('userId');
@@ -31,37 +34,36 @@ handlers.getWatchForm = async function (ctx) {
     }
 
     app.addSkinClass();
-    $( "#accordion" ).accordion();
 
     let brands = await app.getBrands();
 
-    try {
-        brands = JSON.parse(brands);
 
-        if (!brands.success) {
-            notify.showError('Error');
-            ctx.redirect('#/homePage');
-        }
+    brands = JSON.parse(brands);
 
-        ctx.brands = brands.data.brands;
-        ctx.genders = brands.data.genders;
-        ctx.movements = brands.data.movements;
-        ctx.caseMaterials = brands.data.caseMaterials;
-        ctx.braceletMaterials = brands.data.braceletMaterials;
-        ctx.braceletColors = brands.data.braceletColors;
-        ctx.claspMaterials = brands.data.claspMaterials;
-        ctx.clasps = brands.data.clasps;
-        ctx.bezelMaterials = brands.data.bezelMaterials;
-        ctx.glass = brands.data.glass;
-        ctx.waterResistance = brands.data.waterResistance;
-        ctx.dial = brands.data.dial;
-        ctx.dialNumerals = brands.data.dialNumerals;
-        ctx.watchFunctions = brands.data.watchFunctions;
-        ctx.watchCharacteristics = brands.data.watchCharacteristics;
-    }catch (e){
+    if (!brands.success) {
         notify.showError('Error');
+        ctx.redirect('#/homePage');
     }
 
+    ctx.brands = brands.data.brands;
+    ctx.genders = brands.data.genders;
+    ctx.movements = brands.data.movements;
+    ctx.caseMaterials = brands.data.caseMaterials;
+    ctx.braceletMaterials = brands.data.braceletMaterials;
+    ctx.braceletColors = brands.data.braceletColors;
+    ctx.claspMaterials = brands.data.claspMaterials;
+    ctx.clasps = brands.data.clasps;
+    ctx.bezelMaterials = brands.data.bezelMaterials;
+    ctx.glass = brands.data.glass;
+    ctx.waterResistance = brands.data.waterResistance;
+    ctx.dial = brands.data.dial;
+    ctx.dialNumerals = brands.data.dialNumerals;
+    ctx.watchFunctions = brands.data.watchFunctions;
+    ctx.watchCharacteristics = brands.data.watchCharacteristics;
+
+    ctx.dashboard = true;
+    ctx.watchCollection = false;
+    ctx.addWatch = true;
 
     ctx.loadPartials({
             aside: './templates/common/aside.hbs',
@@ -112,41 +114,22 @@ handlers.createWatch = function (ctx) {
     }
 
     let userId = sessionStorage.getItem('userId');
-    let sessionId = sessionStorage.getItem('session_id');
+    let session_id = sessionStorage.getItem('session_id');
 
     app.addWatch(base_caliber, bazel_material, bracelet_color, bracelet_material, brand, caliber,
         calsp_material, case_diameter, case_material, clasp, dial, dial_numerals, frequency,
     gender, glass, model, movement, picture, power_reserve, reference_number, thickness,
-    watch_characteristics, watch_functions, water_resistance, number_of_jewels, userId, sessionId)
+    watch_characteristics, watch_functions, water_resistance, number_of_jewels, userId, session_id)
         .then((data) => {
-            console.log(data);
+            data = $.parseJSON(data);
+            let message = data.message;
+            let isSuccess = data.success;
+            if (isSuccess) {
+                notify.showInfo(message);
+                ctx.redirect('#/homePage');
+            } else {
+                console.log(message);
+                notify.showError(message);
+            }
         })
-
-
 };
-
-//handlers.registerUser = function (ctx) {
-//    let email = ctx.params.email;
-//    let password = ctx.params.password;
-//    let repeatPass = ctx.params.repeatPass;
-//
-//    auth.register(email, password, repeatPass)
-//        .then((userData) => {
-//            try {
-//                userData = $.parseJSON(userData);
-//                let data = userData.data;
-//                let message = userData.message;
-//                let isSuccess = userData.success;
-//
-//                if (isSuccess) {
-//                    auth.saveSession(data);
-//                    notify.showInfo(message);
-//                    ctx.redirect('#/homePage');
-//                } else {
-//                    notify.showError(message);
-//                }
-//            }catch(e){
-//                notify.showError('Error');
-//            }
-//        })
-//};
