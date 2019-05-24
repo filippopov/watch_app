@@ -427,6 +427,46 @@ class WatchService
         return $result;
     }
 
+    public function getWatchesModelsByUserId(int $userId) : array
+    {
+        if (!$userId) {
+            throw new ApplicationException('User problem!');
+        }
+
+        $user = $this->usersRepository->findByCondition(['id' => $userId]);
+
+        if (empty($user)) {
+            throw new ApplicationException('User do not exist');
+        }
+
+        return $this->watchesRepository->getWatchesModelsByUserId($userId);
+    }
+
+    public function getWatchPictures(int $watchId, int $userId) : array
+    {
+        if (!$userId) {
+            throw new ApplicationException('User problem!');
+        }
+
+        $user = $this->usersRepository->findByCondition(['id' => $userId]);
+
+        if (empty($user)) {
+            throw new ApplicationException('User do not exist');
+        }
+
+        if (!$watchId) {
+            throw new ApplicationException('Watch problem!');
+        }
+
+        $watch = $this->watchesRepository->findByCondition(['id' => $watchId]);
+
+        if (empty($watch)) {
+            throw new ApplicationException('Watch do not exist');
+        }
+
+        return $this->watchesRepository->getWatchPictures($watchId, $userId);
+    }
+
     private function savePicture(int $watchId, int $pictureId)
     {
         $result = $this->uploadPictureWatchesRepository->create(['watch_fk' => $watchId, 'upload_picture_fk' => $pictureId]);

@@ -1,4 +1,4 @@
-handlers.getHomePage = function (ctx) {
+handlers.getHomePage = async function (ctx) {
     ctx.isAuth = auth.isAuth();
     ctx.user_id = sessionStorage.getItem('userId');
 
@@ -12,6 +12,12 @@ handlers.getHomePage = function (ctx) {
     ctx.dashboard = true;
     ctx.watchCollection = true;
     ctx.addWatch = false;
+
+    let watchesData = await app.getWatchesModels();
+
+    watchesData = JSON.parse(watchesData);
+
+    ctx.watchesData = watchesData.data;
 
     ctx.loadPartials({
             aside: './templates/common/aside.hbs',
@@ -131,5 +137,39 @@ handlers.createWatch = function (ctx) {
                 console.log(message);
                 notify.showError(message);
             }
+        })
+};
+
+handlers.getEditWatchForm = async function(ctx) {
+    ctx.isAuth = auth.isAuth();
+    ctx.user_id = sessionStorage.getItem('userId');
+
+    let watchId = ctx.params.watchId;
+
+    if (!ctx.isAuth) {
+        ctx.redirect('#/home');
+        return;
+    }
+
+    app.addSkinClass();
+
+    let watchPictures = await app.getWatchPictures(watchId);
+
+    watchPictures = JSON.parse(watchPictures);
+
+    ctx.watchPictures = watchPictures.data;
+
+    ctx.dashboard = true;
+    ctx.watchCollection = false;
+    ctx.addWatch = false;
+
+    ctx.loadPartials({
+            aside: './templates/common/aside.hbs',
+            header: './templates/common/header.hbs',
+            footer: './templates/common/footer.hbs',
+            content: './templates/home/view-watch-info.hbs'
+        })
+        .then(function () {
+            this.partial('./templates/home/home-page.hbs');
         })
 };

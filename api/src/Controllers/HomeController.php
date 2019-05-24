@@ -43,9 +43,19 @@ class HomeController
 
     public function homePage()
     {
-        $session_id = $this->post->get('session_id');
-        $user_id = $this->post->get('user_id');
+        if (!$this->authenticationService->isAuthenticated())
+        {
+            throw new ApplicationException('User is not authenticated!');
+        }
 
+        $userId = (int) $this->post->get('userId');
+        $data = $this->watchService->getWatchesModelsByUserId($userId);
+
+        $this->response->setResponse(Response::RESPONSE_KEY_SUCCESS, true);
+        $this->response->setResponse(Response::RESPONSE_KEY_MESSAGE, 'Successfully login data!');
+        $this->response->setResponse('data', $data);
+        $this->response->getReplayJson();
+        exit;
     }
 
     public function getWatchFormData()
@@ -157,6 +167,25 @@ class HomeController
 
         $this->response->setResponse(Response::RESPONSE_KEY_SUCCESS, true);
         $this->response->setResponse(Response::RESPONSE_KEY_MESSAGE, 'Successfully add watch!');
+        $this->response->setResponse('data', $data);
+        $this->response->getReplayJson();
+        exit;
+    }
+
+    public function watchPictures()
+    {
+        if (!$this->authenticationService->isAuthenticated())
+        {
+            throw new ApplicationException('User is not authenticated!');
+        }
+
+        $watchId = (int) $this->post->get('watch_id');
+        $userId = (int) $this->post->get('user_id');
+
+        $data = $this->watchService->getWatchPictures($watchId, $userId);
+
+        $this->response->setResponse(Response::RESPONSE_KEY_SUCCESS, true);
+        $this->response->setResponse(Response::RESPONSE_KEY_MESSAGE, 'Successfully get pictures!');
         $this->response->setResponse('data', $data);
         $this->response->getReplayJson();
         exit;

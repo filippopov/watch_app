@@ -1,0 +1,16 @@
+<div class="watch-container">
+    {{#if watchPictures}}
+        <div class="cards-layout masonry">
+            {{#each watchPictures}}
+                <span class="card">
+                    <span class="card-inner">
+                        <span class="card-media">
+                            <img src="http://localhost{{path}}">
+                        </span>
+                    </span>
+                </span>
+            {{/each}}
+        </div>
+    {{/if}}
+</div>
+

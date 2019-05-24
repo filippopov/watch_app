@@ -1,0 +1,30 @@
+<div class="title">
+    <h2>My Watch Collection</h2>
+</div>
+
+<ul class="list-watch">
+    {{#each watchesData}}
+        <li class="item">
+            <!--<div>-->
+                <!--<a href=""><i class="fa fa-eye fa-3x"></i></a>-->
+                <!--<a href=""><i class="fa fa-edit fa-3x"></i></a>-->
+                <!--<a href=""><i class="fa fa-trash fa-3x"></i></a>-->
+            <!--</div>-->
+            <a href="#/editWatch/{{{watch_id}}}">
+                <span class="watch-image">
+                    {{#if path}}
+                        <img src="http://localhost{{{path}}}" alt="">
+                    {{else}}
+                        <img src="http://localhost/watch_app/api/uploades/No_image.png" alt="">
+                    {{/if}}
+                </span>
+            <span class="content">
+                <span class="watch-info">
+                    <span class="brand">{{{brands_name}}}</span>
+                    <span class="model">{{{model}}}</span>
+                </span>
+            </span>
+            </a>
+        </li>
+    {{/each}}
+</ul>
