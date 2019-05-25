@@ -1,3 +1,6 @@
+<div class="title">
+    <h2>Watch Information</h2>
+</div>
 <div class="watch-container">
     {{#if watchPictures}}
         <div class="cards-layout masonry">
@@ -5,7 +8,7 @@
                 <span class="card">
                     <span class="card-inner">
                         <span class="card-media">
-                            <img src="http://localhost{{path}}">
+                            <img src="http://localhost{{{path}}}">
                         </span>
                     </span>
                 </span>
@@ -13,4 +16,72 @@
         </div>
     {{/if}}
 </div>
+<table>
+    <thead>
+    <tr>
+        <th>Brand</th>
+        <th>Model</th>
+        <th>Reference number</th>
+        <th>Gender</th>
+        <th>Movement</th>
+        <th>Case Material</th>
+        <th>Bracelet Material</th>
+        <th>Case diameter (mm)</th>
+        <th>Bracelet Color</th>
+        <th>Clasp Material</th>
+        <th>Clasp</th>
+        <th>Bezel Material</th>
+        <th>Thickness (mm)</th>
+        <th>Glass</th>
+        <th>Water Resistance</th>
+        <th>Dial</th>
+        <th>Dial Numerals</th>
+        <th>Movement / Caliber</th>
+        <th>Base caliber</th>
+        <th>Power reserve (h)</th>
+        <th>Number of jewels</th>
+        <th>Frequency (A/h)</th>
+        <th>Functions</th>
+        <th>Others</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        {{#each watchData}}
+            <td data-label="Brand">{{{brand_name}}}</td>
+            <td data-label="Model">{{{model}}}</td>
+            <td data-label="Reference number">{{{reference_number}}}</td>
+            <td data-label="Gender">{{{gender_name}}}</td>
+            <td data-label="Movement">{{{movement_name}}}</td>
+            <td data-label="Case Material">{{{case_material_name}}}</td>
+            <td data-label="Bracelet Material">{{{bracelet_material_name}}}</td>
+            <td data-label="Case diameter (mm)">{{{case_diameter}}}</td>
+            <td data-label="Bracelet Color">{{{bracelet_color_name}}}</td>
+            <td data-label="Clasp Material">{{{clasp_material_name}}}</td>
+            <td data-label="Clasp">{{{clasp_name}}}</td>
+            <td data-label="Bezel Material">{{{bezel_material_name}}}</td>
+            <td data-label="Thickness (mm)">{{{thickness}}}</td>
+            <td data-label="Glass">{{{glass_name}}}</td>
+            <td data-label="Water Resistance">{{{water_resistance_name}}}</td>
+            <td data-label="Dial">{{{dial_name}}}</td>
+            <td data-label="Dial Numerals">{{{dial_numeral_name}}}</td>
+            <td data-label="Movement / Caliber">{{{caliber}}}</td>
+            <td data-label="Base caliber">{{{base_caliber}}}</td>
+            <td data-label="Power reserve (h)">{{{power_reserve}}}</td>
+            <td data-label="Number of jewels">{{{number_of_jewels}}}</td>
+            <td data-label="Frequency (A/h)">{{{frequency}}}</td>
+        {{/each}}
+        {{#if watchFunctions}}
+            <td data-label="Functions">{{{watchFunctions}}}</td>
+        {{else}}
+            <td data-label="Functions">No Functions</td>
+        {{/if}}
+        {{#if watchCharacteristics}}
+            <td data-label="Others">{{{watchCharacteristics}}}</td>
+        {{else}}
+            <td data-label="Others">No Others</td>
+        {{/if}}
 
+    </tr>
+    </tbody>
+</table>

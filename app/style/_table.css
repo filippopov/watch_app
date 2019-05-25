@@ -1,0 +1,143 @@
+table {
+    table-layout: fixed;
+    border: 1px solid #CCC;
+    border-spacing: 0;
+    border-collapse: collapse;
+    margin: 0 2rem 0 2rem;
+}
+
+table td, table th {
+    border: 1px solid #CCC;
+    padding: 0.3rem 0.5rem;
+}
+
+table thead th {
+    text-align: left;
+    background: #CCC;
+}
+
+table tr:nth-child(odd) td {
+    background: #F1F1F1;
+}
+
+@media screen and (max-width: 1919px){
+    table thead {
+        display: none;
+    }
+
+    table,
+    table tbody,
+    table tr, table td{
+        display: block;
+    }
+
+    table tr {
+        border: 2px solid black;
+    }
+
+    table tbody td:before {
+        display: inline-block;
+        width: 13rem;
+        font-weight: bold;
+        text-align: right;
+        padding-right: 1rem;
+        white-space: nowrap;
+    }
+
+    table tbody td:nth-child(1):before {
+        content: attr(data-label);
+    }
+
+    table tbody td:nth-child(2):before {
+        content: attr(data-label);
+    }
+
+    table tbody td:nth-child(3):before {
+        content: attr(data-label);
+    }
+
+    table tbody td:nth-child(4):before {
+        content: attr(data-label);
+    }
+
+    table tbody td:nth-child(5):before {
+        content: attr(data-label);
+    }
+
+    table tbody td:nth-child(6):before {
+        content: attr(data-label);
+    }
+
+    table tbody td:nth-child(7):before {
+        content: attr(data-label);
+    }
+
+    table tbody td:nth-child(8):before {
+        content: attr(data-label);
+    }
+
+    table tbody td:nth-child(9):before {
+        content: attr(data-label);
+    }
+
+    table tbody td:nth-child(10):before {
+        content: attr(data-label);
+    }
+
+    table tbody td:nth-child(11):before {
+        content: attr(data-label);
+    }
+
+    table tbody td:nth-child(12):before {
+        content: attr(data-label);
+    }
+
+    table tbody td:nth-child(13):before {
+        content: attr(data-label);
+    }
+
+    table tbody td:nth-child(14):before {
+        content: attr(data-label);
+    }
+
+    table tbody td:nth-child(15):before {
+        content: attr(data-label);
+    }
+
+    table tbody td:nth-child(16):before {
+        content: attr(data-label);
+    }
+
+    table tbody td:nth-child(17):before {
+        content: attr(data-label);
+    }
+
+    table tbody td:nth-child(18):before {
+        content: attr(data-label);
+    }
+
+    table tbody td:nth-child(19):before {
+        content: attr(data-label);
+    }
+
+    table tbody td:nth-child(20):before {
+        content: attr(data-label);
+    }
+
+    table tbody td:nth-child(21):before {
+        content: attr(data-label);
+    }
+
+    table tbody td:nth-child(22):before {
+        content: attr(data-label);
+    }
+
+    table tbody td:nth-child(23):before {
+        content: attr(data-label);
+    }
+
+    table tbody td:nth-child(24):before {
+        content: attr(data-label);
+    }
+}
+

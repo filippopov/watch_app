@@ -154,10 +154,31 @@ handlers.getEditWatchForm = async function(ctx) {
     app.addSkinClass();
 
     let watchPictures = await app.getWatchPictures(watchId);
+    let watchData = await app.getWatchData(watchId);
+    let watchFunctions = await app.getWatchFunctions(watchId);
+    let watchCharacteristics = await app.getWatchCharacteristics(watchId);
 
     watchPictures = JSON.parse(watchPictures);
+    watchData = JSON.parse(watchData);
+    watchFunctions = JSON.parse(watchFunctions);
+    watchCharacteristics = JSON.parse(watchCharacteristics);
 
     ctx.watchPictures = watchPictures.data;
+    ctx.watchData = watchData.data;
+
+
+    let watchFunctionsArray = [];
+    watchFunctions.data.forEach((e, i) => {
+        watchFunctionsArray.push(e.watch_function_name);
+    });
+
+    let watchCharacteristicsArray = [];
+    watchCharacteristics.data.forEach((e, i) => {
+        watchCharacteristicsArray.push(e.watch_characteristic_name);
+    });
+
+    ctx.watchFunctions = watchFunctionsArray.join(', ');
+    ctx.watchCharacteristics = watchCharacteristicsArray.join(', ');
 
     ctx.dashboard = true;
     ctx.watchCollection = false;

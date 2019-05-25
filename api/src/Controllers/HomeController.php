@@ -190,4 +190,59 @@ class HomeController
         $this->response->getReplayJson();
         exit;
     }
+
+    public function watchData()
+    {
+        if (!$this->authenticationService->isAuthenticated())
+        {
+            throw new ApplicationException('User is not authenticated!');
+        }
+
+        $watchId = (int) $this->post->get('watch_id');
+        $userId = (int) $this->post->get('user_id');
+
+        $data = $this->watchService->getWatchData($watchId, $userId);
+
+        $this->response->setResponse(Response::RESPONSE_KEY_SUCCESS, true);
+        $this->response->setResponse(Response::RESPONSE_KEY_MESSAGE, 'Successfully get watch data!');
+        $this->response->setResponse('data', $data);
+        $this->response->getReplayJson();
+        exit;
+    }
+
+    public function watchFunctions()
+    {
+        if (!$this->authenticationService->isAuthenticated())
+        {
+            throw new ApplicationException('User is not authenticated!');
+        }
+
+        $watchId = (int) $this->post->get('watch_id');
+
+        $data = $this->watchService->watchFunctions($watchId);
+
+        $this->response->setResponse(Response::RESPONSE_KEY_SUCCESS, true);
+        $this->response->setResponse(Response::RESPONSE_KEY_MESSAGE, 'Successfully get watch functions!');
+        $this->response->setResponse('data', $data);
+        $this->response->getReplayJson();
+        exit;
+    }
+
+    public function watchCharacteristics()
+    {
+        if (!$this->authenticationService->isAuthenticated())
+        {
+            throw new ApplicationException('User is not authenticated!');
+        }
+
+        $watchId = (int) $this->post->get('watch_id');
+
+        $data = $this->watchService->watchCharacteristics($watchId);
+
+        $this->response->setResponse(Response::RESPONSE_KEY_SUCCESS, true);
+        $this->response->setResponse(Response::RESPONSE_KEY_MESSAGE, 'Successfully get watch characteristics!');
+        $this->response->setResponse('data', $data);
+        $this->response->getReplayJson();
+        exit;
+    }
 }

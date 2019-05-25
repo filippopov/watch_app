@@ -11,7 +11,7 @@ $(() => {
         this.get('#/forgotPasswordPage', handlers.getForgotPasswordPage);
         this.get('#/homePage', handlers.getHomePage);
         this.get('#/addWatch', handlers.getWatchForm);
-        this.get('#/editWatch/:watchId', handlers.getEditWatchForm);
+        this.get('#/viewWatch/:watchId', handlers.getEditWatchForm);
 
 
 

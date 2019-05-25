@@ -21,6 +21,33 @@ let app = (() => {
         return remote.post('home', 'watchPictures', '', obj);
     }
 
+    function getWatchData (watch_id) {
+        let user_id = sessionStorage.getItem('userId');
+        let session_id = sessionStorage.getItem('session_id');
+
+        let obj = {user_id, session_id, watch_id};
+
+        return remote.post('home', 'watchData', '', obj);
+    }
+
+    function getWatchFunctions (watch_id) {
+        let user_id = sessionStorage.getItem('userId');
+        let session_id = sessionStorage.getItem('session_id');
+
+        let obj = {user_id, session_id, watch_id};
+
+        return remote.post('home', 'watchFunctions', '', obj);
+    }
+
+    function getWatchCharacteristics (watch_id) {
+        let user_id = sessionStorage.getItem('userId');
+        let session_id = sessionStorage.getItem('session_id');
+
+        let obj = {user_id, session_id, watch_id};
+
+        return remote.post('home', 'watchCharacteristics', '', obj);
+    }
+
     function getWatchesModels () {
         let userId = sessionStorage.getItem('userId');
         let session_id = sessionStorage.getItem('session_id');
@@ -45,6 +72,9 @@ let app = (() => {
         getBrands,
         addWatch,
         getWatchesModels,
-        getWatchPictures
+        getWatchPictures,
+        getWatchData,
+        getWatchFunctions,
+        getWatchCharacteristics
     }
 })();

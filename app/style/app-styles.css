@@ -1,6 +1,7 @@
 @import url('_app_picture_upload.css');
 @import url('_watch_collection.css');
 @import url('_watch_gallery.css');
+@import url('_table.css');
 
 .content-wrapper {
     min-height: 90vh;
