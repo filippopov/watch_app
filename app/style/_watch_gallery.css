@@ -78,3 +78,11 @@
 .watch-functions i {
     margin: 0 1.5rem;
 }
+
+.card-media a {
+    position: relative;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    padding: 1rem;
+}

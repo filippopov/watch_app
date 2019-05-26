@@ -57,6 +57,15 @@ let app = (() => {
         return remote.post('home', 'deleteWatch', '', obj);
     }
 
+    function deletePicture(pictureId, watchId) {
+        let user_id = sessionStorage.getItem('userId');
+        let session_id = sessionStorage.getItem('session_id');
+
+        let obj = {user_id, session_id, pictureId, watchId};
+
+        return remote.post('home', 'deletePicture', '', obj);
+    }
+
     function getWatchesModels () {
         let userId = sessionStorage.getItem('userId');
         let session_id = sessionStorage.getItem('session_id');
@@ -95,6 +104,7 @@ let app = (() => {
         getWatchFunctions,
         getWatchCharacteristics,
         deleteWatch,
-        isWatchExist
+        isWatchExist,
+        deletePicture
     }
 })();

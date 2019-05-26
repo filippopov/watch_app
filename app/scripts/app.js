@@ -13,6 +13,8 @@ $(() => {
         this.get('#/addWatch', handlers.getWatchForm);
         this.get('#/viewWatch/:watchId', handlers.viewWatch);
         this.get('#/deleteWatch/:watchId', handlers.deleteWatch);
+        this.get('#/editWatch/:watchId', handlers.getEditWatchForm);
+        this.get('#/deletePicture/:pictureId/:watchId', handlers.deletePicture);
 
 
 

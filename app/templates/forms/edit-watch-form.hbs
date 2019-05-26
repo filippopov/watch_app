@@ -1,0 +1,342 @@
+<div class="title">
+    <h2>Edit Watch</h2>
+</div>
+<div class="watch-functions">
+    <a href="#/viewWatch/{{{watch_id}}}"><i title="Back to home" class="fa fa-backward"></i></a>
+</div>
+
+<div class="watch-container">
+    {{#if watchPictures}}
+        <div class="cards-layout masonry">
+            {{#each watchPictures}}
+                <span class="card">
+                    <span class="card-inner">
+                        <span class="card-media">
+                            <img src="http://localhost{{{path}}}">
+                            <a href="#/deletePicture/{{{up_id}}}/{{{watch_fk}}}"><i title="Delete Watch" class="fa fa-trash fa-5x"></i></a>
+                        </span>
+                    </span>
+                </span>
+            {{/each}}
+        </div>
+    {{/if}}
+</div>
+
+<div class="box-body">
+    <div class="row">
+        <div class="col-md-12">
+            <form method="post" action="#/createWatch">
+                <div id="accordion">
+                    <h3>My watch</h3>
+                    <div>
+                        <div id="uploades"></div>
+                        <div class="dropzone" id="dropzone">Drop files here to upload</div>
+                        <input type="hidden" name="picture" id="picture">
+                        <div class="form-group">
+                            <label>Brand*</label>
+                            <select name="brand" class="form-control select2" style="width: 100%;">
+                                <option value="">Please select</option>
+                                {{#each brands}}
+                                    <option value="{{id}}">{{name}}</option>
+                                {{/each}}
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Model*</label>
+                            <input type="text" name="model" class="form-control" placeholder="Enter ...">
+                        </div>
+                        <div class="form-group">
+                            <label>Reference number</label>
+                            <input type="text" name="reference_number" class="form-control" placeholder="Enter ...">
+                        </div>
+                    </div>
+                    <h3>Enter the most important details</h3>
+                    <div>
+                        <div class="form-group">
+                            <label>Gender</label>
+                            <select name="gender" name="gender" class="form-control select2" style="width: 100%;">
+                                <option value="">Please select</option>
+                                {{#each genders}}
+                                    <option value="{{id}}">{{name}}</option>
+                                {{/each}}
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Movement</label>
+                            <select name="movement" name="movement" class="form-control select2" style="width: 100%;">
+                                <option value="">Please select</option>
+                                {{#each movements}}
+                                    <option value="{{id}}">{{name}}</option>
+                                {{/each}}
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Case Material</label>
+                            <select class="form-control select2" name="case_material" style="width: 100%;">
+                                <option value="">Please select</option>
+                                {{#each caseMaterials}}
+                                    <option value="{{id}}">{{name}}</option>
+                                {{/each}}
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Bracelet Material</label>
+                            <select class="form-control select2" name="bracelet_material" style="width: 100%;">
+                                <option value="">Please select</option>
+                                {{#each braceletMaterials}}
+                                    <option value="{{id}}">{{name}}</option>
+                                {{/each}}
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Case diameter</label>
+                            <div class="input-group">
+                                <input name="case_diameter" placeholder="Enter ..." id="caseDiameterX" type="number" class="form-control"><span class="input-group-addon">mm</span>
+                            </div>
+                        </div>
+                    </div>
+                    <h3>Bracelet/strap</h3>
+                    <div>
+                        <div class="form-group">
+                            <label>Bracelet Color</label>
+                            <select name="bracelet_color" class="form-control select2" style="width: 100%;">
+                                <option value="">Please select</option>
+                                {{#each braceletColors}}
+                                    <option value="{{id}}">{{name}}</option>
+                                {{/each}}
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Clasp Material</label>
+                            <select name="calsp_material" class="form-control select2" style="width: 100%;">
+                                <option value="">Please select</option>
+                                {{#each claspMaterials}}
+                                    <option value="{{id}}">{{name}}</option>
+                                {{/each}}
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Clasp</label>
+                            <select name="clasp" class="form-control select2" style="width: 100%;">
+                                <option value="">Please select</option>
+                                {{#each clasps}}
+                                    <option value="{{id}}">{{name}}</option>
+                                {{/each}}
+                            </select>
+                        </div>
+
+                    </div>
+                    <h3>Case</h3>
+                    <div>
+
+                        <div class="form-group">
+                            <label>Bezel Material</label>
+                            <select name="bazel_material" class="form-control select2" style="width: 100%;">
+                                <option value="">Please select</option>
+                                {{#each bezelMaterials}}
+                                    <option value="{{id}}">{{name}}</option>
+                                {{/each}}
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Thickness</label>
+                            <div class="input-group">
+                                <input name="thickness" placeholder="Enter ..." id="caseDiameterX" type="number" class="form-control"><span class="input-group-addon">mm</span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Glass</label>
+                            <select name="glass" class="form-control select2" style="width: 100%;">
+                                <option value="">Please select</option>
+                                {{#each glass}}
+                                    <option value="{{id}}">{{name}}</option>
+                                {{/each}}
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Water Resistance</label>
+                            <select name="water_resistance" class="form-control select2" style="width: 100%;">
+                                <option value="">Please select</option>
+                                {{#each waterResistance}}
+                                    <option value="{{id}}">{{name}}</option>
+                                {{/each}}
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Dial</label>
+                            <select name="dial" class="form-control select2" style="width: 100%;">
+                                <option value="">Please select</option>
+                                {{#each dial}}
+                                    <option value="{{id}}">{{name}}</option>
+                                {{/each}}
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Dial Numerals</label>
+                            <select name="dial_numerals" class="form-control select2" style="width: 100%;">
+                                <option value="">Please select</option>
+                                {{#each dialNumerals}}
+                                    <option value="{{id}}">{{name}}</option>
+                                {{/each}}
+                            </select>
+                        </div>
+                    </div>
+                    <h3>Caliber</h3>
+                    <div>
+                        <div class="form-group">
+                            <label>Movement/Caliber</label>
+                            <input name="caliber" type="text" class="form-control" placeholder="Enter ...">
+                        </div>
+                        <div class="form-group">
+                            <label>Base caliber</label>
+                            <input name="base_caliber" type="text" class="form-control" placeholder="Enter ...">
+                        </div>
+                        <div class="form-group">
+                            <label>Power reserve</label>
+                            <div class="input-group">
+                                <input name="power_reserve" placeholder="Enter ..." id="caseDiameterX" type="number" class="form-control"><span class="input-group-addon">h</span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Number of jewels</label>
+                            <input type="number" name="number_of_jewels" class="form-control" placeholder="Enter ...">
+                        </div>
+                        <div class="form-group">
+                            <label>Frequency</label>
+                            <div class="input-group">
+                                <input name="frequency" placeholder="Enter ..." id="caseDiameterX" type="number" class="form-control"><span class="input-group-addon">A/h</span>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <h3>Functions</h3>
+                    <div>
+                        <div class="form-group" style="display: flex; flex-wrap: wrap; justify-content: space-around">
+                            <div>
+                                {{#each watchFunctions}}
+                                    {{#if isEven}}
+                                        <div class="checkbox">
+                                            <label>
+                                                <input value="{{id}}" type="checkbox" name="watch_functions[]">
+                                                {{name}}
+                                            </label>
+                                        </div>
+                                    {{/if}}
+                                {{/each}}
+                            </div>
+                            <div>
+                                {{#each watchFunctions}}
+                                    {{#if isEven}}
+                                    {{else}}
+                                        <div class="checkbox">
+                                            <label>
+                                                <input value="{{id}}" type="checkbox" name="watch_functions[]">
+                                                {{name}}
+                                            </label>
+                                        </div>
+                                    {{/if}}
+                                {{/each}}
+                            </div>
+                        </div>
+                    </div>
+                    <h3>Others</h3>
+                    <div>
+                        <div class="form-group" style="display: flex; flex-wrap: wrap; justify-content: space-around">
+                            <div>
+                                {{#each watchCharacteristics}}
+                                    {{#if isEven}}
+                                        <div class="checkbox">
+                                            <label>
+                                                <input value="{{id}}" type="checkbox" name="watch_characteristics[]">
+                                                {{name}}
+                                            </label>
+                                        </div>
+                                    {{/if}}
+                                {{/each}}
+                            </div>
+                            <div>
+                                {{#each watchCharacteristics}}
+                                    {{#if isEven}}
+                                    {{else}}
+                                        <div class="checkbox">
+                                            <label>
+                                                <input value="{{id}}" type="checkbox" name="watch_characteristics[]">
+                                                {{name}}
+                                            </label>
+                                        </div>
+                                    {{/if}}
+                                {{/each}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="box-footer" style="display: flex; justify-content: flex-start">
+                    <a href="" class="btn btn-default">Cancel</a>
+                    <button type="submit" class="btn btn-primary">Save</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
+<script>
+    $(function() {
+        $( "#accordion" ).accordion();
+        $('.select2').select2();
+
+        let dropzone = document.getElementById('dropzone');
+
+        let upload = function(files){
+            let formData = new FormData();
+            let xhr = new XMLHttpRequest();
+
+            for (let x = 0; x < files.length; x++) {
+                formData.append('file[]', files[x]);
+            }
+
+            formData.append('userId', sessionStorage.getItem('userId'));
+            formData.append('session_id', sessionStorage.getItem('session_id'));
+
+            xhr.onload = function(){
+                let data = this.responseText;
+
+                try {
+                    data = JSON.parse(data);
+
+                    if (data.success) {
+                        $('#picture').val(data.data);
+
+                        notify.showInfo('Successfully uploaded pictures!');
+                    }
+
+
+                }catch (e){
+                    notify.showError('Error');
+                }
+            };
+
+            xhr.open('post', 'http://localhost/watch_app/api/home/uploadPicture');
+            xhr.send(formData);
+        };
+
+        dropzone.ondrop = function(e){
+            e.preventDefault();
+            this.className = 'dropzone dragover';
+            upload(e.dataTransfer.files);
+        };
+
+        dropzone.ondragover = function() {
+            this.className = 'dropzone dragover';
+            return false;
+        };
+
+        dropzone.ondragleave = function(){
+            this.className = 'dropzone';
+            return false;
+        };
+    });
+</script>

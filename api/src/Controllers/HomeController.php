@@ -264,6 +264,27 @@ class HomeController
         exit;
     }
 
+    public function deletePicture()
+    {
+        if (!$this->authenticationService->isAuthenticated())
+        {
+            throw new ApplicationException('User is not authenticated!');
+        }
+
+        $watchId = (int) $this->post->get('watchId');
+        $pictureId = (int) $this->post->get('pictureId');
+
+        var_dump($watchId, $pictureId); die();
+
+        $data = $this->watchService->deletePicture($pictureId, $watchId);
+
+        $this->response->setResponse(Response::RESPONSE_KEY_SUCCESS, true);
+        $this->response->setResponse(Response::RESPONSE_KEY_MESSAGE, 'Successfully delete watch!');
+        $this->response->setResponse('data', $data);
+        $this->response->getReplayJson();
+        exit;
+    }
+
     public function isWatchExist()
     {
         if (!$this->authenticationService->isAuthenticated())
