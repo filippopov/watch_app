@@ -42,7 +42,7 @@ class WatchesRepository extends AbstractRepository
                     LIMIT 1) AS path
             FROM watches AS w
             INNER JOIN brands AS b ON (w.brand_fk = b.id)
-            WHERE w.user_id = :user_id;
+            WHERE w.user_id = :user_id AND w.is_active = 1;
         ";
 
         $stmt = $this->db->prepare($qry);
@@ -62,8 +62,10 @@ class WatchesRepository extends AbstractRepository
                     up.id AS up_id
                 FROM upload_picture_watches AS upw
                 INNER JOIN upload_picture AS up ON (upw.upload_picture_fk = up.id)
+                INNER JOIN watches AS w ON (upw.watch_fk = w.id)
                 WHERE upw.watch_fk = :watch_id
                 AND up.user_id = :user_id
+                AND w.is_active = 1
         ";
 
         $stmt = $this->db->prepare($qry);
@@ -114,6 +116,7 @@ class WatchesRepository extends AbstractRepository
                 LEFT JOIN dial_numerals AS dn ON (w.dial_numerals_fk = dn.id)
                 WHERE w.id = :watch_id
                 AND w.user_id = :user_id
+                AND w.is_active = 1
                 LIMIT 1;
         ";
 

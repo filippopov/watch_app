@@ -245,4 +245,41 @@ class HomeController
         $this->response->getReplayJson();
         exit;
     }
+
+    public function deleteWatch()
+    {
+        if (!$this->authenticationService->isAuthenticated())
+        {
+            throw new ApplicationException('User is not authenticated!');
+        }
+
+        $watchId = (int) $this->post->get('watch_id');
+
+        $data = $this->watchService->deleteWatch($watchId);
+
+        $this->response->setResponse(Response::RESPONSE_KEY_SUCCESS, true);
+        $this->response->setResponse(Response::RESPONSE_KEY_MESSAGE, 'Successfully delete watch!');
+        $this->response->setResponse('data', $data);
+        $this->response->getReplayJson();
+        exit;
+    }
+
+    public function isWatchExist()
+    {
+        if (!$this->authenticationService->isAuthenticated())
+        {
+            throw new ApplicationException('User is not authenticated!');
+        }
+
+        $watchId = (int) $this->post->get('watch_id');
+        $userId = (int) $this->post->get('userId');
+
+        $data = $this->watchService->isWatchExist($watchId, $userId);
+
+        $this->response->setResponse(Response::RESPONSE_KEY_SUCCESS, true);
+        $this->response->setResponse(Response::RESPONSE_KEY_MESSAGE, 'Get watch data!');
+        $this->response->setResponse('data', $data);
+        $this->response->getReplayJson();
+        exit;
+    }
 }

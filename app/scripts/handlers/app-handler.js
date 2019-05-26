@@ -140,11 +140,22 @@ handlers.createWatch = function (ctx) {
         })
 };
 
-handlers.getEditWatchForm = async function(ctx) {
+handlers.viewWatch = async function(ctx) {
     ctx.isAuth = auth.isAuth();
     ctx.user_id = sessionStorage.getItem('userId');
 
     let watchId = ctx.params.watchId;
+
+    ctx.watch_id = watchId;
+
+    let isWatchExist = await app.isWatchExist(watchId);
+
+    isWatchExist = JSON.parse(isWatchExist);
+
+    if (isWatchExist.data.length == 0) {
+        ctx.redirect('#/home');
+        return
+    }
 
     if (!ctx.isAuth) {
         ctx.redirect('#/home');
@@ -165,7 +176,6 @@ handlers.getEditWatchForm = async function(ctx) {
 
     ctx.watchPictures = watchPictures.data;
     ctx.watchData = watchData.data;
-
 
     let watchFunctionsArray = [];
     watchFunctions.data.forEach((e, i) => {
@@ -194,3 +204,86 @@ handlers.getEditWatchForm = async function(ctx) {
             this.partial('./templates/home/home-page.hbs');
         })
 };
+
+
+handlers.getWatchForm = async function (ctx) {
+    ctx.isAuth = auth.isAuth();
+    ctx.user_id = sessionStorage.getItem('userId');
+
+    if (!ctx.isAuth) {
+        ctx.redirect('#/home');
+        return;
+    }
+
+    app.addSkinClass();
+
+    let brands = await app.getBrands();
+
+
+    brands = JSON.parse(brands);
+
+    if (!brands.success) {
+        notify.showError('Error');
+        ctx.redirect('#/homePage');
+    }
+
+    ctx.brands = brands.data.brands;
+    ctx.genders = brands.data.genders;
+    ctx.movements = brands.data.movements;
+    ctx.caseMaterials = brands.data.caseMaterials;
+    ctx.braceletMaterials = brands.data.braceletMaterials;
+    ctx.braceletColors = brands.data.braceletColors;
+    ctx.claspMaterials = brands.data.claspMaterials;
+    ctx.clasps = brands.data.clasps;
+    ctx.bezelMaterials = brands.data.bezelMaterials;
+    ctx.glass = brands.data.glass;
+    ctx.waterResistance = brands.data.waterResistance;
+    ctx.dial = brands.data.dial;
+    ctx.dialNumerals = brands.data.dialNumerals;
+    ctx.watchFunctions = brands.data.watchFunctions;
+    ctx.watchCharacteristics = brands.data.watchCharacteristics;
+
+    ctx.dashboard = true;
+    ctx.watchCollection = false;
+    ctx.addWatch = true;
+
+    ctx.loadPartials({
+            aside: './templates/common/aside.hbs',
+            header: './templates/common/header.hbs',
+            footer: './templates/common/footer.hbs',
+            content: './templates/forms/add-watch-form.hbs'
+        })
+        .then(function () {
+            this.partial('./templates/home/home-page.hbs');
+        })
+};
+
+handlers.deleteWatch = async function(ctx) {
+    ctx.isAuth = auth.isAuth();
+    ctx.user_id = sessionStorage.getItem('userId');
+
+    let watchId = ctx.params.watchId;
+
+    if (!ctx.isAuth) {
+        ctx.redirect('#/home');
+        return;
+    }
+
+    $('#exampleModal').modal('hide');
+    $('.modal-backdrop').remove();
+
+    app.addSkinClass();
+
+    let deleteWatch = await app.deleteWatch(watchId);
+
+    deleteWatch = JSON.parse(deleteWatch);
+
+    if (deleteWatch.success && deleteWatch.data) {
+        ctx.redirect('#/home');
+        return;
+    }
+
+    ctx.redirect(`#/viewWatch/${watchId}`);
+    return;
+};
+

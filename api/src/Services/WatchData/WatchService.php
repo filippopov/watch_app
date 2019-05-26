@@ -381,6 +381,8 @@ class WatchService
             $params['number_of_jewels'] = $numberOfJewels;
         }
 
+        $params['is_active'] = 1;
+
         $result = $this->watchesRepository->create($params);
 
         if (!$result) {
@@ -520,6 +522,36 @@ class WatchService
         }
 
         return $this->watchesRepository->getWatchCharacteristics($watchId);
+    }
+
+    public function deleteWatch(int $watchId)
+    {
+        if (!$watchId) {
+            throw new ApplicationException('Watch problem!');
+        }
+
+        $watch = $this->watchesRepository->findByCondition(['id' => $watchId]);
+
+        if (empty($watch)) {
+            throw new ApplicationException('Watch do not exist');
+        }
+
+        return $this->watchesRepository->update($watchId, ['is_active' => 0]);
+    }
+
+    public function isWatchExist(int $watchId, int $userId)
+    {
+        if (!$watchId) {
+            throw new ApplicationException('Watch problem!');
+        }
+
+        $watch = $this->watchesRepository->findByCondition(['id' => $watchId]);
+
+        if (empty($watch)) {
+            throw new ApplicationException('Watch do not exist');
+        }
+
+        return $this->watchesRepository->findByCondition(['id' => $watchId, 'is_active' => 1, 'user_id' => $userId]);
     }
 
     private function savePicture(int $watchId, int $pictureId)

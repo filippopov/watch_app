@@ -66,3 +66,15 @@
     width: 100%;
     height: auto;
 }
+
+.watch-functions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    font-size: 7rem;
+    margin: 1rem 5rem;
+}
+
+.watch-functions i {
+    margin: 0 1.5rem;
+}
