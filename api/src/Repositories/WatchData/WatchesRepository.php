@@ -38,6 +38,7 @@ class WatchesRepository extends AbstractRepository
                     FROM upload_picture_watches AS upw
                     INNER JOIN upload_picture AS up ON (upw.upload_picture_fk = up.id)
                     WHERE upw.watch_fk = w.id
+                    AND up.is_active = 1
                     ORDER BY upw.id
                     LIMIT 1) AS path
             FROM watches AS w
@@ -66,6 +67,7 @@ class WatchesRepository extends AbstractRepository
                 WHERE upw.watch_fk = :watch_id
                 AND up.user_id = :user_id
                 AND w.is_active = 1
+                AND up.is_active = 1
         ";
 
         $stmt = $this->db->prepare($qry);
@@ -131,7 +133,8 @@ class WatchesRepository extends AbstractRepository
     {
         $qry = "
             SELECT
-                wf.name AS watch_function_name
+                wf.name AS watch_function_name,
+                wf.id
             FROM watch_function_watch AS wfw
             INNER JOIN watch_functions AS wf ON (wfw.watch_function_fk = wf.id)
             WHERE wfw.watch_fk = :watch_id;
@@ -148,7 +151,8 @@ class WatchesRepository extends AbstractRepository
     {
         $qry = "
             SELECT
-                wc.name AS watch_characteristic_name
+                wc.name AS watch_characteristic_name,
+                wc.id
             FROM watch_characteristic_watch AS wcw
             INNER JOIN watch_characteristics AS wc ON (wcw.watch_characteristic_fk = wc.id)
             WHERE wcw.watch_fk = :watch_id;

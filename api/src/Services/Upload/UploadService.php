@@ -72,7 +72,7 @@ class UploadService implements UploadServiceInterface
         $pictureIds = [];
         if (!empty($pictures)) {
             foreach($pictures as $path) {
-                $result = $this->uploadPictureRepository->create(['path' => $path, 'user_id' => $userId]);
+                $result = $this->uploadPictureRepository->create(['path' => $path, 'user_id' => $userId, 'is_active' => 1]);
                 if (!$result) {
                     throw new ApplicationException('Can not save pictures!');
                 }

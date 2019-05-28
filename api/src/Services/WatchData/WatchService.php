@@ -11,6 +11,7 @@ namespace WatchApp\Services\WatchData;
 
 use WatchApp\Core\MVC\Session;
 use WatchApp\Exceptions\ApplicationException;
+use WatchApp\Repositories\Picture\UploadPictureRepository;
 use WatchApp\Repositories\Picture\UploadPictureWatchRepository;
 use WatchApp\Repositories\User\UsersRepository;
 use WatchApp\Repositories\WatchData\BezelMaterialRepository;
@@ -76,6 +77,8 @@ class WatchService
 
     private $watchCharacteristicWatchRepository;
 
+    private $uploadPictureRepository;
+
     public function __construct()
     {
         $this->session = Session::instance($_SESSION);
@@ -99,6 +102,7 @@ class WatchService
         $this->uploadPictureWatchesRepository = new UploadPictureWatchRepository();
         $this->watchFunctionWatchRepository = new WatchFunctionWatchRepository();
         $this->watchCharacteristicWatchRepository = new WatchCharacteristicWatchRepository();
+        $this->uploadPictureRepository = new UploadPictureRepository();
     }
 
     public function getWatchBrands()
@@ -417,6 +421,267 @@ class WatchService
         return $result;
     }
 
+    public function editWatch($baseCaliber, $bezelMaterial, $braceletColor, $braceletMaterial, $brand,
+                                $caliber, $claspMaterial, $caseDiameter, $caseMaterial, $clasp, $dial, $dialNumerals, $frequency,
+                                $gender, $glass, $model, $movement, $picture, $powerReserve, $referenceNumber, $thickness,
+                                $watchCharacteristics, $watchFunctions, $waterResistance, $numberOfJewels, $userId, $watchId)
+    {
+
+        $params = [];
+
+        $isExistWatch = $this->watchesRepository->findByCondition(['id' => $watchId, 'user_id' => $userId, 'is_active' => 1]);
+
+        if (empty($isExistWatch)) {
+            throw new ApplicationException('No watch!');
+        }
+
+        if ($brand === '') {
+            throw new ApplicationException('Please select brand!');
+        }
+
+        if ($userId === '') {
+            throw new ApplicationException('User Error');
+        }
+
+        if ($model === '') {
+            throw new ApplicationException('Please set model!');
+        }
+
+        $brandResult = $this->brandsRepository->findByCondition(['id' => $brand]);
+
+        if (empty($brandResult)){
+            throw new ApplicationException('Please enter valid brand!');
+        }
+
+        $userResult = $this->usersRepository->findByCondition(['id' => $userId]);
+
+        if (empty($userResult)){
+            throw new ApplicationException('Please enter valid user!');
+        }
+
+        $params = [
+            'brand_fk' => $brand, 'user_id' => $userId, 'model' => $model
+        ];
+
+        if ($baseCaliber !== '') {
+            $params['base_caliber'] = $baseCaliber;
+        }
+
+        if ($bezelMaterial !== '') {
+            $bezelMaterialResult = $this->bezelMaterialRepository->findByCondition(['id' => $bezelMaterial]);
+
+            if (empty($bezelMaterialResult)) {
+                throw new ApplicationException('Please enter valid bezel material!');
+            }
+
+            $params['bezel_material_fk'] = $bezelMaterial;
+        }
+
+        if ($braceletColor !== '') {
+            $braceletColorResult = $this->braceletColorRepository->findByCondition(['id' => $braceletColor]);
+
+            if (empty($braceletColorResult)) {
+                throw new ApplicationException('Please enter valid bracelet color!');
+            }
+
+            $params['bracelet_color_fk'] = $braceletColor;
+        }
+
+        if ($braceletMaterial !== '') {
+            $braceletMaterialResult = $this->braceletMaterialsRepository->findByCondition(['id' => $braceletMaterial]);
+
+            if (empty($braceletMaterialResult)) {
+                throw new ApplicationException('Please enter valid bracelet material!');
+            }
+
+            $params['bracelet_material_fk'] = $braceletMaterial;
+        }
+
+        if ($caliber !== '') {
+            $params['caliber'] = $caliber;
+        }
+
+        if ($claspMaterial !== '') {
+            $claspMaterialResult = $this->claspMaterialsRepository->findByCondition(['id' => $claspMaterial]);
+
+            if (empty($claspMaterialResult)) {
+                throw new ApplicationException('Please enter valid clasp material!');
+            }
+
+            $params['clasp_material_fk'] = $claspMaterial;
+        }
+
+        if ($caseDiameter !== '') {
+            $caseDiameter = (float) $caseDiameter;
+            $params['case_diameter'] = $caseDiameter;
+        }
+
+        if ($caseMaterial !== '') {
+            $caseMaterialResult = $this->caseMaterialsRepository->findByCondition(['id' => $caseMaterial]);
+
+            if (empty($caseMaterialResult)) {
+                throw new ApplicationException('Please enter valid case material!');
+            }
+
+            $params['case_material_fk'] = $caseMaterial;
+        }
+
+        if ($clasp !== '') {
+            $claspResult = $this->claspRepository->findByCondition(['id' => $clasp]);
+
+            if (empty($claspResult)) {
+                throw new ApplicationException('Please enter valid clasp!');
+            }
+
+            $params['clasp_fk'] = $clasp;
+        }
+
+        if ($dial !== '') {
+            $dialResult = $this->dialRepository->findByCondition(['id' => $dial]);
+
+            if (empty($dialResult)) {
+                throw new ApplicationException('Please enter valid dial!');
+            }
+
+            $params['dial_fk'] = $dial;
+        }
+
+        if ($dialNumerals !== '') {
+            $dialNumeralsResult = $this->dialNumeralsRepository->findByCondition(['id' => $dialNumerals]);
+
+            if (empty($dialNumeralsResult)) {
+                throw new ApplicationException('Please enter valid dial numerals!');
+            }
+
+            $params['dial_numerals_fk'] = $dialNumerals;
+        }
+
+        if ($frequency !== '') {
+            $frequency = (int) $frequency;
+            $params['frequency'] = $frequency;
+        }
+
+        if ($gender !== '') {
+            $genderResult = $this->gendersRepository->findByCondition(['id' => $gender]);
+
+            if (empty($genderResult)) {
+                throw new ApplicationException('Please enter valid gender!');
+            }
+
+            $params['gender_fk'] = $gender;
+        }
+
+        if ($gender !== '') {
+            $genderResult = $this->gendersRepository->findByCondition(['id' => $gender]);
+
+            if (empty($genderResult)) {
+                throw new ApplicationException('Please enter valid gender!');
+            }
+
+            $params['gender_fk'] = $gender;
+        }
+
+        if ($glass !== '') {
+            $glassResult = $this->glassRepository->findByCondition(['id' => $glass]);
+
+            if (empty($glassResult)) {
+                throw new ApplicationException('Please enter valid glass!');
+            }
+
+            $params['glass_fk'] = $glass;
+        }
+
+        if ($movement !== '') {
+            $movementResult = $this->movementsRepository->findByCondition(['id' => $movement]);
+
+            if (empty($movementResult)) {
+                throw new ApplicationException('Please enter valid movement!');
+            }
+
+            $params['movement_fk'] = $movement;
+        }
+
+        if ($powerReserve !== '') {
+            $powerReserve = (int) $powerReserve;
+            $params['power_reserve'] = $powerReserve;
+        }
+
+        if ($referenceNumber !== '') {
+            $params['reference_number'] = $referenceNumber;
+        }
+
+        if ($thickness !== '') {
+            $thickness = (float) $thickness;
+            $params['thickness'] = $thickness;
+        }
+
+        if ($waterResistance !== '') {
+            $waterResistanceResult = $this->waterResistanceRepository->findByCondition(['id' => $waterResistance]);
+
+            if (empty($waterResistanceResult)) {
+                throw new ApplicationException('Please enter valid water resistance!');
+            }
+
+            $params['water_resistance_fk'] = $waterResistance;
+        }
+
+        if ($numberOfJewels !== '') {
+            $numberOfJewels = (int) $numberOfJewels;
+            $params['number_of_jewels'] = $numberOfJewels;
+        }
+
+        $params['is_active'] = 1;
+
+        $result = $this->watchesRepository->update($watchId, $params);
+
+        if (!$result) {
+            throw new ApplicationException('System Error!');
+        }
+
+        if ($picture !== '') {
+            $pictures = explode(',', $picture);
+
+            foreach ($pictures as $pictureId) {
+                $pictureId = (int) $pictureId;
+                $isSavePicture = $this->savePicture($watchId, $pictureId);
+            }
+        }
+
+        $findWatchCharacteristics = $this->watchCharacteristicWatchRepository->findByCondition(['watch_fk' => $watchId]);
+
+        if (!empty($findWatchCharacteristics)) {
+            foreach ($findWatchCharacteristics as $findWatchCharacteristic) {
+                $id = isset($findWatchCharacteristic['id']) ? $findWatchCharacteristic['id'] : 0;
+                $this->watchCharacteristicWatchRepository->delete($id);
+            }
+        }
+
+        $findWatchFunctions = $this->watchFunctionWatchRepository->findByCondition(['watch_fk' => $watchId]);
+
+        if (!empty($findWatchFunctions)) {
+            foreach ($findWatchFunctions as $findWatchFunction) {
+                $id = isset($findWatchFunction['id']) ? $findWatchFunction['id'] : 0;
+                $this->watchFunctionWatchRepository->delete($id);
+            }
+        }
+
+        if ($watchCharacteristics !== '') {
+            foreach ($watchCharacteristics as $watchCharacteristic) {
+                $watchCharacteristicId = (int) $watchCharacteristic;
+                $isSaveWatchCharacteristic = $this->saveWatchCharacteristic($watchId, $watchCharacteristicId);
+            }
+        }
+
+        if ($watchFunctions !== '') {
+            foreach ($watchFunctions as $watchFunction) {
+                $watchFunctionId = (int) $watchFunction;
+                $isSaveWatchFunction = $this->saveWatchFunction($watchId, $watchFunctionId);
+            }
+        }
+
+        return $result;
+    }
+
     public function getWatchCharacteristics()
     {
         $result = $this->watchCharacteristicRepository->findAll();
@@ -552,6 +817,62 @@ class WatchService
         }
 
         return $this->watchesRepository->findByCondition(['id' => $watchId, 'is_active' => 1, 'user_id' => $userId]);
+    }
+
+    public function deletePicture(int $pictureId, int $watchId, int $userId)
+    {
+        if (!$watchId) {
+            throw new ApplicationException('Watch problem!');
+        }
+
+        if (!$pictureId) {
+            throw new ApplicationException('Picture problem!');
+        }
+
+        $picture = $this->uploadPictureRepository->getPicture($pictureId, $watchId, $userId);
+
+        if (empty($picture)) {
+            throw new ApplicationException('Picture do not exist!');
+        }
+
+        return $this->uploadPictureRepository->update($pictureId, ['is_active' => 0]);
+    }
+
+    public function setSelectedValue(array $watch, array $table, string $column):array
+    {
+        $watch = isset($watch[0]) ? $watch[0] : [];
+        $watchValue = isset($watch[$column]) ? $watch[$column] : '';
+
+        if (!empty($table)) {
+            foreach($table as $key => $value) {
+                $table[$key]['selected'] = '';
+
+                if ($watchValue == $value['id']) {
+                    $table[$key]['selected'] = 'selected';
+                }
+            }
+        }
+
+        return $table;
+    }
+
+    public function setCheckedValues(array $functions, array $functionsByWatch, string $index) : array
+    {
+        if (!empty($functions) && !empty($functionsByWatch)) {
+            foreach ($functions as $key => $function) {
+                $functions[$key]['checked'] = '';
+            }
+
+            foreach ($functions as $key => $function) {
+                foreach ($functionsByWatch as $functionByWatch) {
+                    if (($function['id'] == $functionByWatch['id']) && ($function['name'] == $functionByWatch[$index])) {
+                        $functions[$key]['checked'] = 'checked';
+                    }
+                }
+            }
+        }
+
+        return $functions;
     }
 
     private function savePicture(int $watchId, int $pictureId)

@@ -3,7 +3,7 @@ let app = (() => {
         $('body').addClass('skin-blue');
     }
 
-    function getBrands () {
+    function getCreateWatchForm () {
         let userId = sessionStorage.getItem('userId');
         let session_id = sessionStorage.getItem('session_id');
 
@@ -19,6 +19,15 @@ let app = (() => {
         let obj = {user_id, session_id, watch_id};
 
         return remote.post('home', 'watchPictures', '', obj);
+    }
+
+    function getEditWatchForm (watch_id) {
+        let user_id = sessionStorage.getItem('userId');
+        let session_id = sessionStorage.getItem('session_id');
+
+        let obj = {user_id, session_id, watch_id};
+
+        return remote.post('home', 'getEditWatchForm', '', obj);
     }
 
     function getWatchData (watch_id) {
@@ -94,9 +103,19 @@ let app = (() => {
         return remote.post('home', 'addWatch', '', obj);
     }
 
+    function editWatch(base_caliber, bazel_material, bracelet_color, bracelet_material, brand, caliber, calsp_material, case_diameter, case_material, clasp, dial, dial_numerals, frequency, gender, glass, model, movement, picture, power_reserve, reference_number, thickness, watch_characteristics, watch_functions, water_resistance, number_of_jewels, userId, session_id, watch_id) {
+
+        let obj = {base_caliber, bazel_material, bracelet_color, bracelet_material, brand, caliber,
+            calsp_material, case_diameter, case_material, clasp, dial, dial_numerals, frequency,
+            gender, glass, model, movement, picture, power_reserve, reference_number, thickness,
+            watch_characteristics, watch_functions, water_resistance, number_of_jewels, userId, session_id, watch_id};
+
+        return remote.post('home', 'editWatch', '', obj);
+    }
+
     return {
         addSkinClass,
-        getBrands,
+        getCreateWatchForm,
         addWatch,
         getWatchesModels,
         getWatchPictures,
@@ -105,6 +124,8 @@ let app = (() => {
         getWatchCharacteristics,
         deleteWatch,
         isWatchExist,
-        deletePicture
+        deletePicture,
+        getEditWatchForm,
+        editWatch
     }
 })();

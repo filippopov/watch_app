@@ -25,4 +25,28 @@ class UploadPictureRepository extends AbstractRepository
             'primaryKeyName' => 'id'
         ];
     }
+
+    public function getPicture(int $pictureId, int $watchId, int $userId)
+    {
+        $qry = "
+            SELECT
+                up.id AS pictureId,
+                up.path,
+                up.user_id,
+                up.is_active,
+                upw.watch_fk AS watchId
+            FROM upload_picture AS up
+            INNER JOIN upload_picture_watches AS upw ON (upw.upload_picture_fk = up.id)
+            WHERE up.is_active = 1
+            AND up.id = :pictureId
+            AND upw.watch_fk = :watch_id
+            AND up.user_id = :user_id
+        ";
+
+        $stmt = $this->db->prepare($qry);
+
+        $stmt->execute([':pictureId' => $pictureId, ':watch_id' => $watchId, ':user_id' => $userId]);
+
+        return $stmt->fetchAll();
+    }
 }
