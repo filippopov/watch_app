@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "dependencies": {
     "handlebars": "^4.1.2",
-    "jquery": "^3.4.1",
+    "jquery": "^3.5.0",
     "sammy": "^0.7.6",
     "bootstrap": "^3.4.0",
     "bootstrap-colorpicker": "^2.5.3",
